@@ -4,9 +4,9 @@ Pyber Exercise
 written by: A. Lam
 
 # Analysis:
-- Observation 1:
-- Observation 2:
-- Observation 3:
+- Observation 1: Assuming that fares are directly related to distance driven, it would make sense that urban cities would have a higher quantity of rides per city with shorter fares. Similarly, rural areas would have less frequent rides spanning much larger distances, resulting in higher average fares.
+- Observation 2: The quantity of rides contributed by Urban cities offsets the fact that most of them have much lower fares than rural areas, as evidenced by the bubble chart and pie chart on total fares.
+- Observation 3: Port James has a surprisingly high number of rides uncharacteristic of any other city in the dataset.
 
 # Setup
 
@@ -386,11 +386,101 @@ plt.legend()
 plt.title('Pyber Ride Sharing Data')
 plt.xlabel('Total Rides Per City')
 plt.ylabel('Average Fare per City')
+plt.text(40,20,'Note: \nBubbles are sized by Total Drivers per City')
 plt.show()
 ```
 
 
 ![png](Pyber_avl_files/Pyber_avl_10_0.png)
+
+
+
+```python
+# identify outlier
+bubble_data.sort_values(by=['Total Rides'],ascending=False).head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Fare</th>
+      <th>City Type</th>
+      <th>Total Drivers</th>
+      <th>Total Rides</th>
+      <th>color</th>
+    </tr>
+    <tr>
+      <th>city</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Port James</th>
+      <td>31.81</td>
+      <td>Suburban</td>
+      <td>9</td>
+      <td>64</td>
+      <td>lightskyblue</td>
+    </tr>
+    <tr>
+      <th>Port Johnstad</th>
+      <td>25.88</td>
+      <td>Urban</td>
+      <td>22</td>
+      <td>34</td>
+      <td>gold</td>
+    </tr>
+    <tr>
+      <th>Swansonbury</th>
+      <td>27.46</td>
+      <td>Urban</td>
+      <td>64</td>
+      <td>34</td>
+      <td>gold</td>
+    </tr>
+    <tr>
+      <th>South Louis</th>
+      <td>27.09</td>
+      <td>Urban</td>
+      <td>12</td>
+      <td>32</td>
+      <td>gold</td>
+    </tr>
+    <tr>
+      <th>Alvarezhaven</th>
+      <td>23.93</td>
+      <td>Urban</td>
+      <td>21</td>
+      <td>31</td>
+      <td>gold</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 
 # Total Fares by City Type
@@ -409,7 +499,7 @@ plt.show()
 ```
 
 
-![png](Pyber_avl_files/Pyber_avl_12_0.png)
+![png](Pyber_avl_files/Pyber_avl_13_0.png)
 
 
 # Total Rides by City Type
@@ -428,7 +518,7 @@ plt.show()
 ```
 
 
-![png](Pyber_avl_files/Pyber_avl_14_0.png)
+![png](Pyber_avl_files/Pyber_avl_15_0.png)
 
 
 # Total Drivers by City Type
@@ -447,5 +537,5 @@ plt.show()
 ```
 
 
-![png](Pyber_avl_files/Pyber_avl_16_0.png)
+![png](Pyber_avl_files/Pyber_avl_17_0.png)
 
