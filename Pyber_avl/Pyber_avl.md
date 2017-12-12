@@ -491,7 +491,7 @@ group_type = all_data_colored.groupby(['type'])
 plt.pie(group_type['fare'].sum(),
         labels = group_type['fare'].sum().keys(), 
         colors = group_type['color'].min(), 
-        explode = [0,0.2,0.2],
+        explode = [0,0,0.1],
        autopct = '%1.1f%%')
 plt.title('% of Total Fares by City Type')
 plt.axis('equal')
@@ -510,7 +510,7 @@ group_type = bubble_data.groupby(['City Type'])
 plt.pie(group_type['Total Rides'].sum(),
         labels = group_type['Total Rides'].sum().keys(), 
         colors = group_type['color'].min(), 
-        explode = [0,0.2,0.2],
+        explode = [0,0,0.1],
        autopct = '%1.1f%%')
 plt.title('% of Total Rides by City Type')
 plt.axis('equal')
@@ -529,7 +529,7 @@ group_type = all_data_colored.groupby(['type'])
 plt.pie(group_type['driver_count'].sum(),
         labels = group_type['driver_count'].sum().keys(), 
         colors = group_type['color'].min(), 
-        explode = [0,0.2,0.2],
+        explode = [0,0,0.1],
        autopct = '%1.1f%%')
 plt.title('% of Total Drivers by City Type')
 plt.axis('equal')
