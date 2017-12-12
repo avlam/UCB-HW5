@@ -6,7 +6,7 @@ written by: A. Lam
 # Analysis:
 - Observation 1: Assuming that fares are directly related to distance driven, it would make sense that urban cities would have a higher quantity of rides per city with shorter fares. Similarly, rural areas would have less frequent rides spanning much larger distances, resulting in higher average fares.
 - Observation 2: The quantity of rides contributed by Urban cities offsets the fact that most of them have much lower fares than rural areas, as evidenced by the bubble chart and pie chart on total fares.
-- Observation 3: Port James has a surprisingly high number of rides uncharacteristic of any other city in the dataset.
+- Observation 3: Port James has a surprisingly high number of rides uncharacteristic of any other city in the dataset. (edit: Turns out, Point James had been double-entered with two different driver counts in city_data. Judgement call to determine the true number is to use the first entry and discard the second. The implication of the action constrains analysis impact to driver count, as without the correction rides are double-counted.)
 
 # Setup
 
@@ -29,24 +29,37 @@ ride_data = pd.read_csv(ride_data_path)
 
 
 ```python
+print('# Unique Cities: ' + str(len(city_data['city'].unique())) + 
+      '\n# Cities Entered: ' + str(len(city_data['city'])))
+city_data = city_data.drop_duplicates(subset = ['city'],keep='first')
+print('After Cleaning')
+print('# Unique Cities: ' + str(len(city_data['city'].unique())) + 
+      '\n# Cities Entered: ' + str(len(city_data['city'])))
 city_data.head()
 ```
+
+    # Unique Cities: 125
+    # Cities Entered: 126
+    After Cleaning
+    # Unique Cities: 125
+    # Cities Entered: 125
+
 
 
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -104,17 +117,17 @@ ride_data.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -180,17 +193,17 @@ all_data.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -289,17 +302,17 @@ bubble_data.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -386,7 +399,7 @@ plt.legend()
 plt.title('Pyber Ride Sharing Data')
 plt.xlabel('Total Rides Per City')
 plt.ylabel('Average Fare per City')
-plt.text(40,20,'Note: \nBubbles are sized by Total Drivers per City')
+plt.text(0,20,'Note: \nBubbles are sized by Total Drivers per City')
 plt.show()
 ```
 
@@ -404,17 +417,17 @@ bubble_data.sort_values(by=['Total Rides'],ascending=False).head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -438,14 +451,6 @@ bubble_data.sort_values(by=['Total Rides'],ascending=False).head()
   </thead>
   <tbody>
     <tr>
-      <th>Port James</th>
-      <td>31.81</td>
-      <td>Suburban</td>
-      <td>9</td>
-      <td>64</td>
-      <td>lightskyblue</td>
-    </tr>
-    <tr>
       <th>Port Johnstad</th>
       <td>25.88</td>
       <td>Urban</td>
@@ -468,6 +473,14 @@ bubble_data.sort_values(by=['Total Rides'],ascending=False).head()
       <td>12</td>
       <td>32</td>
       <td>gold</td>
+    </tr>
+    <tr>
+      <th>Port James</th>
+      <td>31.81</td>
+      <td>Suburban</td>
+      <td>15</td>
+      <td>32</td>
+      <td>lightskyblue</td>
     </tr>
     <tr>
       <th>Alvarezhaven</th>
